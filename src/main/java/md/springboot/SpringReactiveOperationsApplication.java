@@ -17,7 +17,7 @@ public class SpringReactiveOperationsApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws InterruptedException {
+    public void run(String... args) {
         System.out.println("------ Get Flux ------");
         fruitService.retrieve().subscribe(System.out::println);
 
@@ -59,5 +59,11 @@ public class SpringReactiveOperationsApplication implements CommandLineRunner {
 
         System.out.println("------Distinct FLux------");
         fruitService.distinctFlux().subscribe(System.out::println);
+
+        System.out.println("------Map FLux------");
+        fruitService.mapFlux().subscribe(System.out::println);
+
+        System.out.println("------FlatMap FLux------");
+        fruitService.flatMapFlux().subscribe(System.out::println);
     }
 }

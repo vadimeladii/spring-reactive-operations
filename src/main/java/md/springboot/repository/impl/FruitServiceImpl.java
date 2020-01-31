@@ -3,7 +3,10 @@ package md.springboot.repository.impl;
 import md.springboot.repository.FruitService;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 import reactor.util.function.Tuple2;
+import reactor.util.function.Tuples;
 
 import java.time.Duration;
 import java.util.List;
@@ -85,5 +88,24 @@ public class FruitServiceImpl implements FruitService {
     @Override
     public Flux<String> distinctFlux() {
         return Flux.just("dog", "cat", "bird", "dog", "bird", "anteater").distinct();
+    }
+
+    @Override
+    public Flux<Tuple2<String, String>> mapFlux() {
+        return Flux.just("Michael Jordan", "Scottie Pippen", "Steve Kerr")
+                .map(name -> {
+                    String[] split = name.split("\\s");
+                    return Tuples.of(split[0], split[1]);
+                });
+    }
+
+    @Override
+    public Flux<Tuple2<String, String>> flatMapFlux() {
+        return Flux.just("Michael Jordan", "Scottie Pippen", "Steve Kerr")
+                .flatMap(n -> Mono.just(n)
+                        .map(name -> {
+                            String[] split = name.split("\\s");
+                            return Tuples.of(split[0], split[1]);
+                        }).subscribeOn(Schedulers.parallel()));
     }
 }

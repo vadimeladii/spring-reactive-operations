@@ -31,4 +31,8 @@ public interface FruitService {
     Flux<String> filterFlux();
 
     Flux<String> distinctFlux();
+
+    Flux<Tuple2<String, String>> mapFlux();
+
+    Flux<Tuple2<String, String>> flatMapFlux();
 }
