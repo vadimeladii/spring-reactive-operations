@@ -41,5 +41,23 @@ public class SpringReactiveOperationsApplication implements CommandLineRunner {
 
         System.out.println("------Selecting the first reactive type------");
         fruitService.firstFlux(fruitService.retrieve(), fruitService.retrieveFromArray()).subscribe(System.out::println);
+
+        System.out.println("------Skip a specified number of messages------");
+        fruitService.skipAFew(3L).subscribe(System.out::println);
+
+        System.out.println("------Skip operation waits until some duration has passed before passing messages------");
+        fruitService.skipAFewSeconds(3L).subscribe(System.out::println);
+
+        System.out.println("------Take a specified number of messages------");
+        fruitService.takeAFew(3L).subscribe(System.out::println);
+
+        System.out.println("------Take operation waits until some duration has passed------");
+        fruitService.takeAFewSeconds(3L).subscribe(System.out::println);
+
+        System.out.println("------Filter FLux------");
+        fruitService.filterFlux().subscribe(System.out::println);
+
+        System.out.println("------Distinct FLux------");
+        fruitService.distinctFlux().subscribe(System.out::println);
     }
 }

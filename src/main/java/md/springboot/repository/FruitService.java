@@ -19,4 +19,16 @@ public interface FruitService {
     Flux<Tuple2<String, String>> zipFluxes(Flux<String> fluxFirst, Flux<String> fluxSecond);
 
     Flux<String> firstFlux(Flux<String> fluxFirst, Flux<String> fluxSecond);
+
+    Flux<String> skipAFew(Long skipped);
+
+    Flux<String> skipAFewSeconds(Long skipped);
+
+    Flux<String> takeAFew(Long skipped);
+
+    Flux<String> takeAFewSeconds(Long skipped);
+
+    Flux<String> filterFlux();
+
+    Flux<String> distinctFlux();
 }

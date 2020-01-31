@@ -53,4 +53,37 @@ public class FruitServiceImpl implements FruitService {
     public Flux<String> firstFlux(Flux<String> fluxFirst, Flux<String> fluxSecond) {
         return Flux.first(fluxFirst, fluxSecond);
     }
+
+    @Override
+    public Flux<String> skipAFew(Long skipped) {
+        return Flux.just("Apple", "Orange", "Grape", "Banana", "Strawberry").skip(skipped);
+    }
+
+    @Override
+    public Flux<String> skipAFewSeconds(Long skipped) {
+        return Flux.just("Apple", "Orange", "Grape", "Banana", "Strawberry").skip(Duration.ofSeconds(skipped));
+    }
+
+    @Override
+    public Flux<String> takeAFew(Long skipped) {
+        return Flux.just("Apple", "Orange", "Grape", "Banana", "Strawberry").take(skipped);
+    }
+
+    @Override
+    public Flux<String> takeAFewSeconds(Long skipped) {
+        return Flux.just("Apple", "Orange", "Grape", "Banana", "Strawberry").take(Duration.ofSeconds(skipped));
+    }
+
+    @Override
+    public Flux<String> filterFlux() {
+        return Flux.just(
+                "Yellowstone", "Yosemite", "Grand Canyon",
+                "Zion", "Grand Teton")
+                .filter(np -> !np.contains(" "));
+    }
+
+    @Override
+    public Flux<String> distinctFlux() {
+        return Flux.just("dog", "cat", "bird", "dog", "bird", "anteater").distinct();
+    }
 }
