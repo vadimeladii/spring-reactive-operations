@@ -32,5 +32,14 @@ public class SpringReactiveOperationsApplication implements CommandLineRunner {
 
         System.out.println("------Create a interval Flux------"); // Thread.sleep(100000);
         fruitService.generateIntervalFlux(1, 4).subscribe(System.out::println);
+
+        System.out.println("------Merging two Flux streams------");
+        fruitService.mergeFluxes(fruitService.retrieve(), fruitService.retrieveFromArray()).subscribe(System.out::println);
+
+        System.out.println("------Zipping two Flux streams------");
+        fruitService.zipFluxes(fruitService.retrieve(), fruitService.retrieveFromArray()).subscribe(System.out::println);
+
+        System.out.println("------Selecting the first reactive type------");
+        fruitService.firstFlux(fruitService.retrieve(), fruitService.retrieveFromArray()).subscribe(System.out::println);
     }
 }

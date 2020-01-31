@@ -3,6 +3,7 @@ package md.springboot.repository.impl;
 import md.springboot.repository.FruitService;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
+import reactor.util.function.Tuple2;
 
 import java.time.Duration;
 import java.util.List;
@@ -36,5 +37,20 @@ public class FruitServiceImpl implements FruitService {
     @Override
     public Flux<Long> generateIntervalFlux(Integer sencond, Integer timespan) {
         return Flux.interval(Duration.ofSeconds(5)).take(timespan);
+    }
+
+    @Override
+    public Flux<String> mergeFluxes(Flux<String> fluxFirst, Flux<String> fluxSecond) {
+        return fluxFirst.mergeWith(fluxSecond);
+    }
+
+    @Override
+    public Flux<Tuple2<String, String>> zipFluxes(Flux<String> fluxFirst, Flux<String> fluxSecond) {
+        return fluxFirst.zipWith(fluxSecond);
+    }
+
+    @Override
+    public Flux<String> firstFlux(Flux<String> fluxFirst, Flux<String> fluxSecond) {
+        return Flux.first(fluxFirst, fluxSecond);
     }
 }
