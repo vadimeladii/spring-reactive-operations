@@ -35,4 +35,6 @@ public interface FruitService {
     Flux<Tuple2<String, String>> mapFlux();
 
     Flux<Tuple2<String, String>> flatMapFlux();
+
+    Flux<String> bufferFlux();
 }

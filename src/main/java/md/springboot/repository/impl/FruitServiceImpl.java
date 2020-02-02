@@ -108,4 +108,13 @@ public class FruitServiceImpl implements FruitService {
                             return Tuples.of(split[0], split[1]);
                         }).subscribeOn(Schedulers.parallel()));
     }
+
+    @Override
+    public Flux<String> bufferFlux() {
+        return Flux.just("apple", "orange", "banana", "kiwi", "strawberry")
+                .buffer(3)
+                .flatMap(n -> Flux.fromIterable(n)
+                        .map(String::toUpperCase)
+                        .subscribeOn(Schedulers.parallel()));
+    }
 }

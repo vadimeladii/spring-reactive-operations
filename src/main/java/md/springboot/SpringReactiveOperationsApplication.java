@@ -65,5 +65,8 @@ public class SpringReactiveOperationsApplication implements CommandLineRunner {
 
         System.out.println("------FlatMap FLux------");
         fruitService.flatMapFlux().subscribe(System.out::println);
+
+        System.out.println("------The buffer operation------");
+        fruitService.bufferFlux().subscribe(System.out::println);
     }
 }
